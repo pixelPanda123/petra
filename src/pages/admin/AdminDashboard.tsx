@@ -1,119 +1,69 @@
 
 import React from 'react';
-import { Users, UserCheck, DollarSign, Activity, Plus } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Users, UserCheck, Settings, FileText, MapPin, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import MetricCard from '@/components/ui/MetricCard';
 import Header from '@/components/layout/Header';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
+import Sidebar from '@/components/layout/Sidebar';
+import SystemOverviewCards from '@/components/admin/SystemOverviewCards';
+import FinancialOverviewPanel from '@/components/admin/FinancialOverviewPanel';
+import QuickAccessPanel from '@/components/admin/QuickAccessPanel';
 
 const AdminDashboard = () => {
-  const revenueData = [
-    { month: 'Jan', revenue: 45000 },
-    { month: 'Feb', revenue: 52000 },
-    { month: 'Mar', revenue: 48000 },
-    { month: 'Apr', revenue: 61000 },
-    { month: 'May', revenue: 55000 },
-    { month: 'Jun', revenue: 67000 },
-  ];
-
-  const facilityData = [
-    { facility: 'Main Field', students: 45, utilization: 85 },
-    { facility: 'Training Ground A', students: 32, utilization: 70 },
-    { facility: 'Training Ground B', students: 28, utilization: 65 },
-    { facility: 'Indoor Court', students: 18, utilization: 55 },
+  const sidebarItems = [
+    { name: 'Dashboard', href: '/admin', icon: Users },
+    { name: 'Students', href: '/admin/students', icon: Users },
+    { name: 'Coaches', href: '/admin/coaches', icon: UserCheck },
+    { name: 'Facilities', href: '/admin/facilities', icon: MapPin },
+    { name: 'System Logs', href: '/admin/logs', icon: FileText },
+    { name: 'Permissions', href: '/admin/permissions', icon: Shield },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header title="Admin Dashboard" userRole="Administrator" userName="John Smith" />
+    <div className="min-h-screen bg-gray-50 flex">
+      <Sidebar items={sidebarItems} />
       
-      <div className="p-6">
-        {/* Metrics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <MetricCard
-            title="Total Students"
-            value={127}
-            icon={Users}
-            trend={{ value: 12, isPositive: true }}
-          />
-          <MetricCard
-            title="Active Coaches"
-            value={8}
-            icon={UserCheck}
-            trend={{ value: 0, isPositive: true }}
-          />
-          <MetricCard
-            title="Monthly Revenue"
-            value="$67,400"
-            icon={DollarSign}
-            trend={{ value: 8.2, isPositive: true }}
-          />
-          <MetricCard
-            title="System Health"
-            value="98.5%"
-            icon={Activity}
-            trend={{ value: 2.1, isPositive: true }}
-          />
-        </div>
+      <div className="flex-1">
+        <Header title="Admin Dashboard" userRole="Administrator" userName="John Smith" />
+        
+        <div className="p-6">
+          {/* Auto-refresh indicator */}
+          <div className="mb-4 text-xs text-gray-500 flex justify-end">
+            <span className="flex items-center space-x-1">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span>Auto-refresh: 60s</span>
+            </span>
+          </div>
 
-        {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Monthly Revenue Trend</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={revenueData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip formatter={(value) => [`$${value}`, 'Revenue']} />
-                  <Line type="monotone" dataKey="revenue" stroke="#3b82f6" strokeWidth={2} />
-                </LineChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
+          {/* System Overview Cards */}
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold mb-4">System Overview</h2>
+            <SystemOverviewCards />
+          </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Facility Utilization</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={facilityData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="facility" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="utilization" fill="#10b981" />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Quick Actions */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-4">
-              <Button className="flex items-center space-x-2">
-                <Plus className="h-4 w-4" />
-                <span>Add Student</span>
-              </Button>
-              <Button variant="outline" className="flex items-center space-x-2">
-                <Plus className="h-4 w-4" />
-                <span>Add Coach</span>
-              </Button>
-              <Button variant="outline">View System Logs</Button>
-              <Button variant="outline">Manage Permissions</Button>
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+            {/* Main Panel - Financial Overview */}
+            <div className="xl:col-span-2">
+              <h2 className="text-xl font-semibold mb-4">Financial Overview</h2>
+              <FinancialOverviewPanel />
             </div>
-          </CardContent>
-        </Card>
+
+            {/* Quick Access Panel */}
+            <div>
+              <h2 className="text-xl font-semibold mb-4">Quick Access</h2>
+              <QuickAccessPanel />
+            </div>
+          </div>
+
+          {/* Keyboard Shortcuts Info */}
+          <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <h3 className="text-sm font-medium text-blue-900 mb-2">Keyboard Shortcuts</h3>
+            <div className="text-xs text-blue-700 space-x-4">
+              <span>Alt+D: Dashboard</span>
+              <span>Alt+F: Financial</span>
+              <span>Alt+U: User Manager</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
