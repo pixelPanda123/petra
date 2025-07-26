@@ -10,6 +10,10 @@ import StudentManagement from "./pages/admin/StudentManagement";
 import CoachManagement from "./pages/admin/CoachManagement";
 import FacilityManagement from "./pages/admin/FacilityManagement";
 import StudentDashboard from "./pages/student/StudentDashboard";
+import AttendancePage from "./pages/student/AttendancePage";
+import PerformancePage from "./pages/student/PerformancePage";
+import SessionsPage from "./pages/student/SessionsPage";
+import FeePage from "./pages/student/FeePage";
 import CoachDashboard from "./pages/coach/CoachDashboard";
 import HeadCoachDashboard from "./pages/head-coach/HeadCoachDashboard";
 import NotFound from "./pages/NotFound";
@@ -29,6 +33,10 @@ const App = () => (
           <Route path="/admin/coaches" element={<CoachManagement />} />
           <Route path="/admin/facilities" element={<FacilityManagement />} />
           <Route path="/student" element={<StudentDashboard />} />
+          <Route path="/student/attendance" element={<AttendancePage />} />
+          <Route path="/student/performance" element={<PerformancePage />} />
+          <Route path="/student/sessions" element={<SessionsPage />} />
+          <Route path="/student/fees" element={<FeePage />} />
           <Route path="/coach" element={<CoachDashboard />} />
           <Route path="/head-coach" element={<HeadCoachDashboard />} />
           <Route path="*" element={<NotFound />} />
