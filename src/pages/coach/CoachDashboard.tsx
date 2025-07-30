@@ -129,17 +129,17 @@ const CoachDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  <Button className="w-full justify-start">
+                  <Button className="w-full justify-start" onClick={() => window.location.href = '/coach/sessions'}>
                     <Users className="h-4 w-4 mr-2" />
                     View All Sessions
                   </Button>
-                  <Button variant="outline" className="w-full justify-start">
+                  <Button variant="outline" className="w-full justify-start" onClick={() => window.location.href = '/coach/attendance'}>
                     <Calendar className="h-4 w-4 mr-2" />
-                    Attendance Portal
+                    Mark Attendance
                   </Button>
-                  <Button variant="outline" className="w-full justify-start">
+                  <Button variant="outline" className="w-full justify-start" onClick={() => window.location.href = '/coach/ratings'}>
                     <CheckCircle className="h-4 w-4 mr-2" />
-                    Performance Scoring
+                    Student Ratings
                   </Button>
                 </div>
               </CardContent>

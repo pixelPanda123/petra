@@ -15,7 +15,11 @@ import PerformancePage from "./pages/student/PerformancePage";
 import SessionsPage from "./pages/student/SessionsPage";
 import FeePage from "./pages/student/FeePage";
 import CoachDashboard from "./pages/coach/CoachDashboard";
+import AttendanceManagement from "./pages/coach/AttendanceManagement";
+import StudentRatings from "./pages/coach/StudentRatings";
 import HeadCoachDashboard from "./pages/head-coach/HeadCoachDashboard";
+import SessionManagement from "./pages/head-coach/SessionManagement";
+import { default as HeadCoachStudentManagement } from "./pages/head-coach/StudentManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,7 +42,11 @@ const App = () => (
           <Route path="/student/sessions" element={<SessionsPage />} />
           <Route path="/student/fees" element={<FeePage />} />
           <Route path="/coach" element={<CoachDashboard />} />
+          <Route path="/coach/attendance" element={<AttendanceManagement />} />
+          <Route path="/coach/ratings" element={<StudentRatings />} />
           <Route path="/head-coach" element={<HeadCoachDashboard />} />
+          <Route path="/head-coach/sessions" element={<SessionManagement />} />
+          <Route path="/head-coach/students" element={<HeadCoachStudentManagement />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
